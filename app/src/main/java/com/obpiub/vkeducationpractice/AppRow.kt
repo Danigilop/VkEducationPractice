@@ -2,6 +2,7 @@ package com.obpiub.vkeducationpractice
 
 import android.media.Image
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.content.MediaType.Companion.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,10 +25,12 @@ import androidx.wear.compose.material3.Text
 @Composable
 fun AppRow(
     app: AppItem,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onCLick: () -> Unit
     ){
     Row(modifier = modifier
         .fillMaxWidth()
+        .clickable(onClick =onCLick)
         .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -44,5 +47,4 @@ fun AppRow(
     }
 
     }
-
 }

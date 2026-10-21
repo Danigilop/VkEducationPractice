@@ -10,11 +10,17 @@ import androidx.compose.ui.Modifier
 fun AppList(
     apps: List<AppItem>,
     modifier: Modifier = Modifier,
-    ){
+    onAppClick: (AppItem) -> Unit
+){
     LazyColumn(
         modifier = modifier){
         items(apps){app ->
-            AppRow(app = app)
+            AppRow(app = app,
+                onCLick = {
+                    onAppClick(app)
+                }
+            )
+
         }
     }
 

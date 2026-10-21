@@ -21,3 +21,60 @@ val apps= listOf(
     )
 
 )
+val showcaseApps = listOf(
+    AppItem(
+        name = "Погода",
+        description = "Прогноз погоды в вашем городе",
+        category = "Погода",
+        iconRes = R.drawable.ic_launcher_foreground
+    ),
+    AppItem(
+        name = "неПогода",
+        description = "Прогноз погоды в вашем городе",
+        category = "Погода",
+        iconRes = R.drawable.ic_launcher_foreground
+    ),
+    AppItem(
+        name = "Погода",
+        description = "Прогноз погоды в вашем городе",
+        category = "Погода",
+        iconRes = R.drawable.ic_launcher_foreground
+    ),
+    AppItem(
+        name = "Погода",
+        description = "Прогноз погоды в вашем городе",
+        category = "Погода",
+        iconRes = R.drawable.ic_launcher_foreground
+    ),
+    AppItem(
+        name = "неПогода",
+        description = "Прогноз погоды в вашем городе",
+        category = "Погода",
+        iconRes = R.drawable.ic_launcher_foreground
+    ),
+    AppItem(
+        name = "Погода",
+        description = "Прогноз погоды в вашем городе",
+        category = "Погода",
+        iconRes = R.drawable.ic_launcher_foreground
+    ),AppItem(
+        name = "Погода",
+        description = "Прогноз погоды в вашем городе",
+        category = "Погода",
+        iconRes = R.drawable.ic_launcher_foreground
+    ),
+    AppItem(
+        name = "неПогода",
+        description = "Прогноз погоды в вашем городе",
+        category = "Погода",
+        iconRes = R.drawable.ic_launcher_foreground
+    ),
+    AppItem(
+        name = "Погода",
+        description = "Прогноз погоды в вашем городе",
+        category = "Погода",
+        iconRes = R.drawable.ic_launcher_foreground
+    ),
+
+)
+val showcasePages = showcaseApps.chunked(3)

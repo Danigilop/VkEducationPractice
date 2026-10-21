@@ -19,29 +19,31 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             VkEducationPracticeTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    topBar = {
+                        AppToolbar()
+                    }
+                ) { innerPadding ->
+                    AppShowcase(pages = showcasePages,
+                        onAppClick ={selectedApp ->
+                            println(selectedApp.name)
+                        },
+                        modifier = Modifier
+                            .padding(innerPadding)
+                            .fillMaxSize())
+                    //AppList(
+                      //  apps = apps,
+                        //onAppClick = {selectedApp ->
+                          //  println(selectedApp.name)
+
+                        //},
+                        //modifier = Modifier
+                          //  .padding(innerPadding)
+                            //.fillMaxSize()
+                    //)
+                    }
                 }
-            }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    VkEducationPracticeTheme {
-        Greeting("Android")
     }
 }

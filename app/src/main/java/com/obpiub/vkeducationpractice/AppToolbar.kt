@@ -2,6 +2,7 @@ package com.obpiub.vkeducationpractice
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,21 +16,24 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun AppToolbar(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onToolBarClick:()-> Unit
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.primary)
             .statusBarsPadding()
+            .clickable(onClick = onToolBarClick)
             .padding(horizontal = 16.dp, vertical = 12.dp)
-    ) {
-        Image(
-            painter = painterResource(
-                id = R.drawable.ic_launcher_foreground
-            ),
-            contentDescription = "Иконка приложения",
-            modifier = Modifier.size(40.dp)
-        )
-    }
+    )
+    {
+            Image(
+                painter = painterResource(
+                    id = R.drawable.ic_launcher_foreground
+                ),
+                contentDescription = "Иконка приложения",
+                modifier = Modifier.size(40.dp)
+            )
+        }
 }

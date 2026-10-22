@@ -27,7 +27,7 @@ import com.obpiub.vkeducationpractice.ui.theme.VkEducationPracticeTheme
 @Composable
 fun AppDetailsScreen(
     modifier: Modifier = Modifier,
-    onBackClick:() ->Unit
+    onBackClick:() ->Unit,
 ) {
     val app = remember { getApp() }
 
@@ -45,6 +45,7 @@ fun AppDetailsScreen(
             onShareClick = {
                 Toast.makeText(context, underDevelopmentText, Toast.LENGTH_SHORT).show()
             },
+
         )
         Spacer(Modifier.height(8.dp))
         AppDetailsHeader(

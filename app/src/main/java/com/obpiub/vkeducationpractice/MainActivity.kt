@@ -21,27 +21,11 @@ class MainActivity : ComponentActivity() {
             VkEducationPracticeTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    topBar = {
-                        AppToolbar()
-                    }
-                ) { innerPadding ->
-                    AppShowcase(pages = showcasePages,
-                        onAppClick ={selectedApp ->
-                            println(selectedApp.name)
-                        },
-                        modifier = Modifier
-                            .padding(innerPadding)
-                            .fillMaxSize())
-                    //AppList(
-                      //  apps = apps,
-                        //onAppClick = {selectedApp ->
-                          //  println(selectedApp.name)
 
-                        //},
-                        //modifier = Modifier
-                          //  .padding(innerPadding)
-                            //.fillMaxSize()
-                    //)
+                ) { innerPadding ->
+                    AppNavigation(modifier = Modifier
+                        .padding(innerPadding),
+                        )
                     }
                 }
         }

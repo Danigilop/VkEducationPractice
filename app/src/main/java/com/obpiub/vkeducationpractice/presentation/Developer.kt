@@ -1,4 +1,4 @@
-package com.obpiub.vkeducationpractice
+package com.obpiub.vkeducationpractice.presentation
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.obpiub.vkeducationpractice.R
 import com.obpiub.vkeducationpractice.ui.theme.VkEducationPracticeTheme
 
 @Composable

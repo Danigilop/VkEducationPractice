@@ -1,4 +1,4 @@
-package com.obpiub.vkeducationpractice
+package com.obpiub.vkeducationpractice.domain
 
 data class App(
     val name: String,
@@ -9,4 +9,5 @@ data class App(
     val iconUrl: String,
     val screenshotUrlList: List<String>,
     val description: String,
+    val id: String
 )

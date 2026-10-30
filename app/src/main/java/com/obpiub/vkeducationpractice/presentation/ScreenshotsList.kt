@@ -1,4 +1,4 @@
-package com.obpiub.vkeducationpractice
+package com.obpiub.vkeducationpractice.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -18,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.obpiub.vkeducationpractice.R
 import com.obpiub.vkeducationpractice.ui.theme.VkEducationPracticeTheme
 
 @Composable

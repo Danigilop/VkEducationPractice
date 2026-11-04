@@ -1,5 +1,6 @@
 package com.obpiub.vkeducationpractice.presentation
 
+import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,6 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.obpiub.vkeducationpractice.R
 import com.obpiub.vkeducationpractice.domain.App
+import com.obpiub.vkeducationpractice.domain.Category
 
 @Composable
 fun AppDetailsContent(
@@ -32,6 +34,7 @@ fun AppDetailsContent(
     modifier: Modifier = Modifier,
     onBackClick:() ->Unit,
     onAppClick:(App) -> Unit,
+    onShareClick:() -> Unit
 ) {
     val context = LocalContext.current
     val underDevelopmentText = stringResource(R.string.under_developement)
@@ -45,7 +48,8 @@ fun AppDetailsContent(
                 onBackClick()
             },
             onShareClick = {
-                Toast.makeText(context, underDevelopmentText, Toast.LENGTH_SHORT).show()
+                onShareClick()
+
             },
 
             )
@@ -67,6 +71,7 @@ fun AppDetailsContent(
         ScreenshotsList(
             screenshotUrlList = app.screenshotUrlList,
             contentPadding = PaddingValues(horizontal = 16.dp),
+            category = app.category
         )
         Spacer(Modifier.height(12.dp))
         AppDescription(
@@ -109,7 +114,8 @@ fun AppDetailsScreen(
     state: AppDetailsState,
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
-    onAppClick: (App) -> Unit
+    onAppClick: (App) -> Unit,
+    onShareClick: () -> Unit
 ) {
     when (state) {
         is AppDetailsState.Content -> {
@@ -119,6 +125,7 @@ fun AppDetailsScreen(
                 modifier = modifier,
                 onBackClick = onBackClick,
                 onAppClick = onAppClick,
+                onShareClick = onShareClick
             )
         }
 

@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.obpiub.vkeducationpractice.R
+import com.obpiub.vkeducationpractice.domain.Category
 import com.obpiub.vkeducationpractice.ui.theme.VkEducationPracticeTheme
 
 @Composable
@@ -26,7 +27,13 @@ fun ScreenshotsList(
     screenshotUrlList: List<String>,
     contentPadding: PaddingValues,
     modifier: Modifier = Modifier,
-) {
+    category: Category
+)
+{
+    val screenshotRatio = when (category) {
+        Category.GAME -> 16f / 9f
+        Category.APP -> 9f / 16f
+    }
     Column(modifier) {
         Text(
             text = stringResource(R.string.app_details_screenshots),
@@ -44,7 +51,7 @@ fun ScreenshotsList(
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(16f / 9f)
+                    .aspectRatio(screenshotRatio)
                     .clip(RoundedCornerShape(8.dp))
             )
         }
@@ -63,6 +70,7 @@ private fun Preview() {
                 "https://static.rustore.ru/imgproxy/TjeurtC7BczOVJt74XhjGYuQnG1l4rx6zpDqyMb00GY/preset:web_scr_lnd_335/plain/https://static.rustore.ru/apk/393868735/content/SCREENSHOT/08318f76-7a9c-43aa-b4a7-1aa878d00861.jpg@webp",
             ),
             contentPadding = PaddingValues(horizontal = 16.dp),
+            category = Category.APP
         )
     }
 }

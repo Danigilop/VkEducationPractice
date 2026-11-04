@@ -139,19 +139,21 @@ class AppsRepositoryImpl(
         ),
         // https://www.rustore.ru/catalog/app/com.vk.vkvideo
         AppDto(
-            id = "com.vk.vkvideo",
-            name = "VK Видео: кино, сериалы, ТВ, мультфильмы и клипы",
-            developer = "VK",
-            category = Category.APP,
+            id = "guild_of_heroes",
+            name = "Гильдия Героев: Экшен ММО РПГ",
+            developer = "VK Play",
+            category = Category.GAME,
             ageRating = 12,
-            size = 99.0f,
-            iconUrl = "https://static.rustore.ru/apk/2027823295/content/ICON/97486018-5785-424d-9cab-4fe496d27c76.png",
+            size = 223.7f,
+            iconUrl = "https://static.rustore.ru/imgproxy/APsbtHxkVa4MZ0DXjnIkSwFQ_KVIcqHK9o3gHY6pvOQ/preset:web_app_icon_62/plain/https://static.rustore.ru/apk/393868735/content/ICON/3f605e3e-f5b3-434c-af4d-77bc5f38820e.png@webp",
             screenshotUrlList = listOf(
-                "https://static.rustore.ru/2026/4/15/39/apk/2027823295/content/SCREENSHOT/0cff6242-3ca9-4591-b6e7-42fbd31b4b2c.jpg",
-                "https://static.rustore.ru/2026/4/15/5e/apk/2027823295/content/SCREENSHOT/508b971e-1220-4592-ae1f-a3f31f03dfd7.png",
-                "https://static.rustore.ru/2026/7/2/f1/apk/2027823295/content/SCREENSHOT/8398b9a4-872c-4880-9b3d-fb885c31551f.png",
+                "https://static.rustore.ru/imgproxy/-y8kd-4B6MQ-1OKbAbnoAIMZAzvoMMG9dSiHMpFaTBc/preset:web_scr_lnd_335/plain/https://static.rustore.ru/apk/393868735/content/SCREENSHOT/dfd33017-e90d-4990-aa8c-6f159d546788.jpg@webp",
+                "https://static.rustore.ru/imgproxy/dZCvNtRKKFpzOmGlTxLszUPmwi661IhXynYZGsJQvLw/preset:web_scr_lnd_335/plain/https://static.rustore.ru/apk/393868735/content/SCREENSHOT/60ec4cbc-dcf6-4e69-aa6f-cc2da7de1af6.jpg@webp",
+                "https://static.rustore.ru/imgproxy/g5whSI1uNqaL2TUO7TFfM8M63vXpWXNCm2vlX4Ahvc4/preset:web_scr_lnd_335/plain/https://static.rustore.ru/apk/393868735/content/SCREENSHOT/c2dde8bc-c4ab-482a-80a5-2789149f598d.jpg@webp",
+                "https://static.rustore.ru/imgproxy/TjeurtC7BczOVJt74XhjGYuQnG1l4rx6zpDqyMb00GY/preset:web_scr_lnd_335/plain/https://static.rustore.ru/apk/393868735/content/SCREENSHOT/08318f76-7a9c-43aa-b4a7-1aa878d00861.jpg@webp",
             ),
-            description = "Смотрите фильмы, сериалы, шоу и ролики авторов. Находите видео по интересам и сохраняйте доступные записи для просмотра без интернета.",
+            description = "Легендарный рейд героев в Фэнтези РПГ. " +
+                    "Станьте героем гильдии и сразите мастера подземелья!",
         ),
     )
     override fun getApps(): List<App> {

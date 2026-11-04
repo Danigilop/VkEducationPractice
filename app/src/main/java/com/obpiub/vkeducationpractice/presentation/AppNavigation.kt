@@ -1,5 +1,6 @@
 package com.obpiub.vkeducationpractice.presentation
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -70,6 +71,21 @@ fun AppNavigation(
                 },
                 onAppClick = { app ->
                     navController.navigate("details/${app.id}")
+                },
+                onShareClick = {
+                    val intent = Intent(Intent.ACTION_SEND)
+                    intent.type = "text/plain"
+                    intent.putExtra(
+                        Intent.EXTRA_TEXT,
+                        "Посмотри это приложение!"
+                    )
+
+                    val chooser = Intent.createChooser(
+                        intent,
+                        "Поделиться с помощью"
+                    )
+
+                    navController.context.startActivity(chooser)
                 }
             )
             }

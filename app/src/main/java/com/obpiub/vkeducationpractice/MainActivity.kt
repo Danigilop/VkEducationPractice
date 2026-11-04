@@ -7,11 +7,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.obpiub.vkeducationpractice.presentation.AppNavigation
 import com.obpiub.vkeducationpractice.ui.theme.VkEducationPracticeTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,29 +22,27 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             VkEducationPracticeTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                val snackbarHostState = remember { (SnackbarHostState()) }
+                val scope = rememberCoroutineScope()
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    snackbarHost = {
+                        SnackbarHost(hostState = snackbarHostState)
+                    }
+
+                ) { innerPadding ->
+                    AppNavigation(
+                        modifier = Modifier
+                            .padding(innerPadding),
+                        onToolBarClick = {
+                            scope.launch {
+                                snackbarHostState.showSnackbar("Нажали")
+                            }
+                        }
+
                     )
+                    }
                 }
-            }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    VkEducationPracticeTheme {
-        Greeting("Android")
     }
 }

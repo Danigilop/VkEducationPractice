@@ -3,9 +3,9 @@ package com.obpiub.vkeducationpractice.data
 import com.obpiub.vkeducationpractice.domain.App
 import com.obpiub.vkeducationpractice.domain.AppsRepository
 import com.obpiub.vkeducationpractice.domain.Category
-import kotlin.String
+import javax.inject.Inject
 
-class AppsRepositoryImpl(
+class AppsRepositoryImpl @Inject constructor (
     private val mapper: AppMapper
 ):  AppsRepository{
     private val appDto = listOf(

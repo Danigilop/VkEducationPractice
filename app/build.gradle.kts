@@ -1,4 +1,6 @@
 plugins {
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
 }
@@ -37,9 +39,13 @@ android {
 
 dependencies {
     implementation(libs.coil.compose)
+    implementation("androidx.hilt:hilt-lifecycle-viewmodel-compose:1.3.0")
+
     implementation(libs.androidx.navigation.compose)
     implementation(libs.coil.network.okhttp)
     implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons.core)

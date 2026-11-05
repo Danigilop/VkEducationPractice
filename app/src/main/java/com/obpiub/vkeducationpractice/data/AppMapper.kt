@@ -1,8 +1,9 @@
 package com.obpiub.vkeducationpractice.data
 
 import com.obpiub.vkeducationpractice.domain.App
+import javax.inject.Inject
 
-class AppMapper {
+class AppMapper @Inject constructor() {
     fun toDomain(dto: AppDto): App {
         return App(
             name = dto.name,

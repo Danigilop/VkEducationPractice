@@ -7,14 +7,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
-import androidx.navigation.compose.composable
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.obpiub.vkeducationpractice.data.AppMapper
-import com.obpiub.vkeducationpractice.data.AppsRepositoryImpl
 
 @Composable
 fun AppNavigation(
@@ -28,14 +24,7 @@ fun AppNavigation(
         startDestination = "list",
     ){
         composable("list"){
-            val appListViewModel: AppListViewModel = viewModel(factory = viewModelFactory {
-                initializer {
-                    val mapper = AppMapper()
-                    val repository = AppsRepositoryImpl(mapper)
-                    AppListViewModel(repository)
-                }
-            }
-            )
+            val appListViewModel: AppListViewModel = hiltViewModel()
             Column() {
                 AppToolbar(
                     onToolBarClick = onToolBarClick
@@ -48,21 +37,8 @@ fun AppNavigation(
                     })
             }
         }
-        composable("details/{appId}") {backStackEntry ->
-            val appId = requireNotNull(
-                backStackEntry.arguments?.getString("appId")
-            )
-            val detailsViewModel: AppDetailsViewModel = viewModel(
-                factory = viewModelFactory {
-                    initializer {
-                        val mapper = AppMapper()
-                        val repository = AppsRepositoryImpl(mapper)
-                        AppDetailsViewModel(
-                            repository,
-                            appId=appId)
-                    }
-                }
-            )
+        composable("details/{appId}") {
+            val detailsViewModel: AppDetailsViewModel = hiltViewModel()
 
             AppDetailsScreen(
                 state = detailsViewModel.state,

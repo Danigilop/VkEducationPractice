@@ -30,11 +30,9 @@ fun AppNavigation(
                     onToolBarClick = onToolBarClick
                 )
                 Spacer(Modifier.height(16.dp))
-                AppList(
-                    appListViewModel.appList,
-                    onAppClick = { app ->
-                        navController.navigate("details/${app.id}")
-                    })
+                AppListScreen(
+                    state = appListViewModel.state,
+                    )
             }
         }
         composable("details/{appId}") {

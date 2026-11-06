@@ -2,11 +2,14 @@ package com.obpiub.vkeducationpractice.data
 
 import com.obpiub.vkeducationpractice.domain.App
 import com.obpiub.vkeducationpractice.domain.AppsRepository
+import com.obpiub.vkeducationpractice.domain.CatalogApp
 import com.obpiub.vkeducationpractice.domain.Category
 import javax.inject.Inject
 
 class AppsRepositoryImpl @Inject constructor (
-    private val mapper: AppMapper
+    private val mapper: AppMapper,
+    private val appsApi: AppsApi,
+    private val catalogAppMapper: CatalogAppMapper
 ):  AppsRepository{
     private val appDto = listOf(
         // https://www.rustore.ru/catalog/app/ru.yandex.yandexmaps
@@ -161,4 +164,10 @@ class AppsRepositoryImpl @Inject constructor (
             mapper.toDomain(dto)
         }
     }
-}
+
+    override suspend fun getCatalog(): List<CatalogApp> {
+        return appsApi.getCatalogApp().map { dto ->
+            catalogAppMapper.toDomain(dto)
+        }
+    }
+    }

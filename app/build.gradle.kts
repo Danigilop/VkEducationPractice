@@ -40,6 +40,8 @@ android {
 dependencies {
     implementation(libs.coil.compose)
     implementation("androidx.hilt:hilt-lifecycle-viewmodel-compose:1.3.0")
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.coil.network.okhttp)

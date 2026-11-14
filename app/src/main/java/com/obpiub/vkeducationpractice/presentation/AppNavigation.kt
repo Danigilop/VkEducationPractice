@@ -30,8 +30,9 @@ fun AppNavigation(
                     onToolBarClick = onToolBarClick
                 )
                 Spacer(Modifier.height(16.dp))
-                AppListScreen(
-                    state = appListViewModel.state,
+                AppListScreen(state = appListViewModel.state,
+                    onAppClick = { appId ->
+                        navController.navigate("details/${android.net.Uri.encode(appId)}")}
                     )
             }
         }
@@ -43,8 +44,8 @@ fun AppNavigation(
                 onBackClick = {
                     navController.popBackStack()
                 },
-                onAppClick = { app ->
-                    navController.navigate("details/${app.id}")
+                onAppClick = { appId ->
+                    navController.navigate("details/${android.net.Uri.encode(appId)}")
                 },
                 onShareClick = {
                     val intent = Intent(Intent.ACTION_SEND)

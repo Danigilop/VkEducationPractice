@@ -4,18 +4,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.obpiub.vkeducationpractice.domain.App
+import com.obpiub.vkeducationpractice.domain.CatalogApp
 
 @Composable
 fun ShowcasePage(
-    apps: List<App>,
+    apps: List<CatalogApp>,
     modifier: Modifier = Modifier,
-    onAppClick: (App) -> Unit
+    onAppClick: (String) -> Unit
 ){
     Column(modifier = modifier) {
         apps.forEach { app->
-            AppRow(app,
-                onCLick ={
-                    onAppClick(app)
+            CatalogAppRow(app,
+                onClick ={
+                    onAppClick(app.id)
                 } )
         }
     }

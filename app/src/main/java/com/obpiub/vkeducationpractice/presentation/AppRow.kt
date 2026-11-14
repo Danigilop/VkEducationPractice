@@ -40,10 +40,7 @@ fun AppRow(
             Text(text = app.name,  color = MaterialTheme.colorScheme.onSurface)
             Text(text = app.description,color = MaterialTheme.colorScheme.onSurface, maxLines = 2, overflow = TextOverflow.Ellipsis)
             Text(
-                text = when (app.category) {
-                    Category.APP -> "Приложение"
-                    Category.GAME -> "Игра"
-                },
+                text = app.category,
                 color = MaterialTheme.colorScheme.onSurface
             )
     }

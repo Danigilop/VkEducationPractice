@@ -4,7 +4,7 @@ import com.obpiub.vkeducationpractice.domain.App
 import javax.inject.Inject
 
 class AppMapper @Inject constructor() {
-    fun toDomain(dto: AppDto): App {
+    fun toDomain(dto: AppDetailsDto): App {
         return App(
             name = dto.name,
             developer = dto.developer,

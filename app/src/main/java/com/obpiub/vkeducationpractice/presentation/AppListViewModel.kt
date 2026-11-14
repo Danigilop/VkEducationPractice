@@ -19,7 +19,6 @@ class AppListViewModel @Inject constructor(
 ): ViewModel(){
     var state: AppListState by mutableStateOf(AppListState.Loading)
         private set
-    val appList = repository.getApps()
     init {
         loadCatalog()
     }

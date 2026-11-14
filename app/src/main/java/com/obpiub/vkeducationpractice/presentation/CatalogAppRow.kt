@@ -1,6 +1,7 @@
 package com.obpiub.vkeducationpractice.presentation
 
 import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,9 +22,10 @@ import coil3.compose.AsyncImage
 import com.obpiub.vkeducationpractice.domain.CatalogApp
 
 @Composable
-fun CatalogAppRow(app: CatalogApp){
+fun CatalogAppRow(app: CatalogApp, onClick:() -> Unit){
     Row(modifier = Modifier
         .fillMaxWidth()
+        .clickable(onClick = onClick)
         .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically) {
         AsyncImage(

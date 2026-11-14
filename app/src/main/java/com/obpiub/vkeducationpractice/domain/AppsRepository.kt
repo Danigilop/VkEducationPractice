@@ -1,6 +1,7 @@
 package com.obpiub.vkeducationpractice.domain
 
+
 interface AppsRepository {
-    fun getApps(): List<App>
+    suspend fun getApp(id: String): App
     suspend fun getCatalog(): List<CatalogApp>
 }

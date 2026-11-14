@@ -47,7 +47,7 @@ fun AppDetailsHeader(
         Spacer(Modifier.width(16.dp))
         Column {
             Text(
-                text = getCategoryText(app.category),
+                text = (app.category),
                 color = MaterialTheme.colorScheme.secondary,
                 fontSize = 12.sp,
             )

@@ -159,10 +159,10 @@ class AppsRepositoryImpl @Inject constructor (
                     "Станьте героем гильдии и сразите мастера подземелья!",
         ),
     )
-    override fun getApps(): List<App> {
-        return appDto.map { dto ->
-            mapper.toDomain(dto)
-        }
+
+    override suspend fun getApp(id: String): App {
+        val dto = appsApi.getAppDetails(id)
+        return mapper.toDomain(dto)
     }
 
     override suspend fun getCatalog(): List<CatalogApp> {

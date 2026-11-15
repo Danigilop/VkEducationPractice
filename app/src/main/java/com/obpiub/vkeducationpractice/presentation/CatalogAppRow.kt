@@ -22,7 +22,10 @@ import coil3.compose.AsyncImage
 import com.obpiub.vkeducationpractice.domain.CatalogApp
 
 @Composable
-fun CatalogAppRow(app: CatalogApp, onClick:() -> Unit){
+fun CatalogAppRow(app: CatalogApp,
+                  rating: Float? = null,
+                  onClick:() -> Unit,
+                  ){
     Row(modifier = Modifier
         .fillMaxWidth()
         .clickable(onClick = onClick)
@@ -46,6 +49,9 @@ fun CatalogAppRow(app: CatalogApp, onClick:() -> Unit){
         Spacer(Modifier.width(12.dp))
         Column() {
             Text(app.name)
+            if (rating != null) {
+                Text("★ $rating")
+            }
             Text(app.description)
             Text(app.category)
         }

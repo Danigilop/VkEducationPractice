@@ -17,14 +17,21 @@ import com.obpiub.vkeducationpractice.ui.theme.VkEducationPracticeTheme
 fun InstallButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    installState: InstallState
 ) {
+    val label = when (installState){
+        InstallState.NotInstalled ->stringResource(R.string.install)
+        is InstallState.Installing->stringResource(R.string.install_cancel, installState.progress)
+        is InstallState.Installed->stringResource(R.string.install_completed)
+    }
     Button(
         onClick = onClick,
+        enabled = installState != InstallState.Installed,
         shape = RoundedCornerShape(8.dp),
         contentPadding = PaddingValues(vertical = 12.dp),
         modifier = modifier,
     ) {
-        Text(text = stringResource(R.string.install))
+        Text(text = label)
     }
 }
 
@@ -35,6 +42,7 @@ private fun Preview() {
         InstallButton(
             onClick = {},
             modifier = Modifier.fillMaxWidth(),
+            installState = InstallState.NotInstalled
         )
     }
 }

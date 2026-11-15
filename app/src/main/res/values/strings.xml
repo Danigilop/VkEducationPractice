@@ -10,4 +10,6 @@
     <string name="app_details_read_more">Читать подробнее</string>
     <string name="app_details_developer">Разработчик</string>
     <string name="under_developement">В процессе разработки</string>
+    <string name="install_cancel">Отменить (%1$d%%)</string>
+    <string name="install_completed">Установлено</string>
 </resources>

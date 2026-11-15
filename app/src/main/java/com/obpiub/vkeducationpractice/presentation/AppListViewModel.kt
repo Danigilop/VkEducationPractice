@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
+import kotlin.system.measureTimeMillis
 
 @HiltViewModel
 class AppListViewModel @Inject constructor(
@@ -26,7 +27,22 @@ class AppListViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val apps = repository.getCatalog()
-                state = AppListState.Content(apps)
+                val content = AppListState.Content(apps)
+                state = content
+
+                val ids = apps.map { app -> app.id }
+
+                val sequentialTime = measureTimeMillis {
+                    val ratings = repository.loadRatingsSequentially(ids)
+                    state = content.copy(ratings = ratings)
+                }
+                Log.d("Ratings", "Последовательно: ${ids.size} приложений, $sequentialTime мс")
+
+                val parallelTime = measureTimeMillis {
+                    val ratings = repository.loadRatingsInParallel(ids)
+                    state = content.copy(ratings = ratings)
+                }
+                Log.d("Ratings", "Через async: ${ids.size} приложений, $parallelTime мс")
             }
             catch (e: IOException){
                 Log.e("CatalogLoad", "Ошибка загрузки каталога", e)

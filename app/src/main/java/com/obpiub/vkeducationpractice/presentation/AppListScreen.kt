@@ -27,6 +27,7 @@ fun AppListScreen(state: AppListState,
                 items(state.apps){app ->
                     CatalogAppRow(
                         app = app,
+                        rating = state.ratings[app.id],
                         onClick = {
                             onAppClick(app.id)
                         })

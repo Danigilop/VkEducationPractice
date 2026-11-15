@@ -8,7 +8,8 @@ sealed interface AppListState {
         val message: String
     ): AppListState
     data class Content(
-        val apps: List<CatalogApp>
+        val apps: List<CatalogApp>,
+        val ratings: Map<String, Float> = emptyMap(),
 
     ): AppListState
 }

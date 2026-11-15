@@ -4,12 +4,16 @@ import com.obpiub.vkeducationpractice.domain.App
 import com.obpiub.vkeducationpractice.domain.AppsRepository
 import com.obpiub.vkeducationpractice.domain.CatalogApp
 import com.obpiub.vkeducationpractice.domain.Category
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
 
 class AppsRepositoryImpl @Inject constructor (
     private val mapper: AppMapper,
     private val appsApi: AppsApi,
-    private val catalogAppMapper: CatalogAppMapper
+    private val catalogAppMapper: CatalogAppMapper,
+    private val ratingApi: RatingApi,
 ):  AppsRepository{
     private val appDto = listOf(
         // https://www.rustore.ru/catalog/app/ru.yandex.yandexmaps
@@ -170,4 +174,30 @@ class AppsRepositoryImpl @Inject constructor (
             catalogAppMapper.toDomain(dto)
         }
     }
+    override suspend fun loadRatingsSequentially(
+        ids: List<String>,
+    ): Map<String, Float> {
+        val ratings = mutableMapOf<String, Float>()
+
+        for (id in ids) {
+            val rating = ratingApi.getRating(id)
+            ratings[id] = rating
+        }
+
+        return ratings
+    }
+    override suspend fun loadRatingsInParallel(
+        ids: List<String>,
+    ): Map<String, Float> = coroutineScope {
+        val requests = ids.map { id ->
+            async {
+                val rating = ratingApi.getRating(id)
+                id to rating
+            }
+        }
+
+        requests.awaitAll().toMap()
+    }
+
+
     }

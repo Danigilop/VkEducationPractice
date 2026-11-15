@@ -36,7 +36,9 @@ fun AppDetailsContent(
     modifier: Modifier = Modifier,
     onBackClick:() ->Unit,
     onAppClick:(String) -> Unit,
-    onShareClick:() -> Unit
+    onShareClick:() -> Unit,
+    onInstallClick:() -> Unit,
+    installState: InstallState,
 ) {
     val context = LocalContext.current
     val underDevelopmentText = stringResource(R.string.under_developement)
@@ -62,9 +64,8 @@ fun AppDetailsContent(
         )
         Spacer(Modifier.height(16.dp))
         InstallButton(
-            onClick = {
-                Toast.makeText(context, underDevelopmentText, Toast.LENGTH_SHORT).show()
-            },
+            installState = installState,
+            onClick =onInstallClick,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp)
@@ -116,7 +117,8 @@ fun AppDetailsScreen(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
     onAppClick: (String) -> Unit,
-    onShareClick: () -> Unit
+    onShareClick: () -> Unit,
+    onInstallClick: () -> Unit
 ) {
     when (state) {
         is AppDetailsState.Content -> {
@@ -126,7 +128,10 @@ fun AppDetailsScreen(
                 modifier = modifier,
                 onBackClick = onBackClick,
                 onAppClick = onAppClick,
-                onShareClick = onShareClick
+                onShareClick = onShareClick,
+                onInstallClick = onInstallClick,
+                installState = state.installState,
+
             )
         }
 

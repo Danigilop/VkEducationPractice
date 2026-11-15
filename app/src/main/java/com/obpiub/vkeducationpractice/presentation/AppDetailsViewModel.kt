@@ -9,6 +9,11 @@ import androidx.lifecycle.viewModelScope
 import com.obpiub.vkeducationpractice.domain.App
 import com.obpiub.vkeducationpractice.domain.AppsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
@@ -20,8 +25,9 @@ class AppDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
 
 ) : ViewModel() {
-    var state: AppDetailsState by mutableStateOf(AppDetailsState.Loading)
-        private set
+    private val _state = MutableStateFlow<AppDetailsState>(AppDetailsState.Loading)
+    val state = _state.asStateFlow()
+    private var installJob: Job? = null
     private val appId: String = checkNotNull(savedStateHandle["appId"])
 
 
@@ -31,23 +37,59 @@ class AppDetailsViewModel @Inject constructor(
             val app = try {
                 repository.getApp(appId)
             } catch (e: IOException) {
-                state = AppDetailsState.Error("Не удалось загрузить приложение")
+                _state.value = AppDetailsState.Error("Не удалось загрузить приложение")
                 return@launch
             } catch (e: HttpException) {
-                state = if (e.code() == 404) AppDetailsState.NotFound("Приложение не найдено")
+                _state.value = if (e.code() == 404) AppDetailsState.NotFound("Приложение не найдено")
                 else AppDetailsState.Error("Ошибка сервера: ${e.code()}")
                 return@launch
             }
             val content = AppDetailsState.Content(app, emptyList())
-            state = content
+            _state.value = content
             try {
                 val pages = repository.getCatalog().filter { it.id != appId }.chunked(3)
-                state = content.copy(showcasePages = pages)
+                _state.value = content.copy(showcasePages = pages)
             } catch (e: IOException) {
-                // Keep successfully loaded details.
             } catch (e: HttpException) {
-                // Keep successfully loaded details.
             }
         }
+    }
+    private fun updateInstallState(installState: InstallState) {
+        _state.update { current ->
+            if (current is AppDetailsState.Content) {
+                current.copy(installState = installState)
+            } else {
+                current
+            }
+        }
+    }
+    fun onInstallClick() {
+        val current = _state.value
+        if (current !is AppDetailsState.Content) return
+
+        when (current.installState) {
+            InstallState.NotInstalled -> {
+                updateInstallState(InstallState.Installing(0))
+                installJob = viewModelScope.launch {
+                    emulateInstall()
+                }
+            }
+
+            is InstallState.Installing -> {
+                installJob?.cancel()
+                installJob = null
+                updateInstallState(InstallState.NotInstalled)
+            }
+
+            InstallState.Installed -> Unit
+        }
+    }
+    private suspend fun emulateInstall(){
+        for (progress in 5..100 step 5){
+            delay(150)
+            updateInstallState(InstallState.Installing(progress))
+        }
+        updateInstallState(InstallState.Installed)
+
     }
 }

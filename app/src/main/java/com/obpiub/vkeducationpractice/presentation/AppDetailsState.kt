@@ -6,7 +6,8 @@ import com.obpiub.vkeducationpractice.domain.CatalogApp
 sealed interface AppDetailsState {
     data class Content(
         val app: App,
-        val showcasePages: List<List<CatalogApp>>
+        val showcasePages: List<List<CatalogApp>>,
+        val installState: InstallState = InstallState.NotInstalled
     ) : AppDetailsState
 
     data class NotFound(

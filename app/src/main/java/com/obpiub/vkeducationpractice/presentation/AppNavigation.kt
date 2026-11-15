@@ -5,9 +5,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -38,9 +41,10 @@ fun AppNavigation(
         }
         composable("details/{appId}") {
             val detailsViewModel: AppDetailsViewModel = hiltViewModel()
+            val detailsState by detailsViewModel.state.collectAsStateWithLifecycle()
 
             AppDetailsScreen(
-                state = detailsViewModel.state,
+                state = detailsState,
                 onBackClick = {
                     navController.popBackStack()
                 },
@@ -61,7 +65,8 @@ fun AppNavigation(
                     )
 
                     navController.context.startActivity(chooser)
-                }
+                },
+                onInstallClick = detailsViewModel::onInstallClick,
             )
             }
         }
